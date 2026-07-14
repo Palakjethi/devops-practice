@@ -38,3 +38,7 @@ jobs:
           context: .
           push: ${{ github.event_name == 'push' }}
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-practice:latest
+
+      - name: Trigger Render deploy
+        if: github.event_name == 'push'
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
