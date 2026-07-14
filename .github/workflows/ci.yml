@@ -37,7 +37,9 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name == 'push' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-practice:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/devops-practice:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/devops-practice:latest
 
       - name: Trigger Render deploy
         if: github.event_name == 'push'
